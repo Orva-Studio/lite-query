@@ -1,36 +1,42 @@
+"use client";
+
 import { useSyncExternalStore } from "react";
+import type * as Types from "./types";
 
-export const queryCache = new Map();
-const defaultStaleTime = 5_000;
+export let queryCache: Map<Types.QueryKey, Types.CacheItem> = new Map();
+const DEFAULT_STALE_TIME = 5_000;
 
-let preloadedDataSources = [];
+let staleTime: number = DEFAULT_STALE_TIME;
+let preloadedDataSources: Types.DataSource[] = [];
 
-export function useQuery(options) {
-  return useLiteQuery(options.queryKey, options.queryFn, ...options);
+export function useQuery(options: { queryKey: Types.QueryKey; queryFn: Types.QueryFn } & Types.QueryOptions) {
+  const { queryKey, queryFn, ...restOptions } = options;
+  return useLiteQuery(queryKey, queryFn, restOptions);
 }
 
-export function useLiteQuery(key, fn, options) {
+export function useLiteQuery(key: Types.QueryKey, queryFn: Types.QueryFn, options: Types.QueryOptions) {
   queryCache.set(key, queryCache.get(key) ?? { status: "idle", payload: null });
   const data = useSyncExternalStore(subscriber, () => queryCache.get(key));
-  const isStale = Date.now() - data.timestamp > (options?.staleTime ?? defaultStaleTime);
+  const isStale = Date.now() - data.timestamp > (options?.staleTime ?? staleTime);
 
   if (data.status === "idle" || (options?.refetchOnMount && data.status === "success" && isStale)) {
-    fetchOrUsePreloadedData(key, fn, options);
+    fetchOrUsePreloadedData(key, queryFn, options);
   }
 
-  return formatDataResponse(data, key, fn);
+  return formatDataResponse(data, key, queryFn);
 }
 
-function subscriber(callback) {
+function subscriber(callback: () => void) {
   window.addEventListener("dataFetched", callback);
   return () => {
     window.removeEventListener("dataFetched", callback);
   };
 }
 
-function prefetchData(key, fn, options) {
-  const existingController = queryCache.get(key)?.controller;
-  if (existingController && queryCache.get(key).status === "loading") {
+function prefetchData(key: Types.QueryKey, fn: Types.QueryFn, options?: Types.QueryOptions) {
+  const existingController = (queryCache.get(key) as Types.CacheItem)?.controller;
+
+  if (existingController && queryCache.get(key)!.status === "loading") {
     console.log(`Cancelling the ongoing fetch for key ${key} `);
     existingController.abort();
   }
@@ -73,13 +79,15 @@ function prefetchData(key, fn, options) {
     });
 }
 
-export function prefetchQuery(key, fn) {
+export function prefetchQuery(key: Types.QueryKey, fn: Types.QueryFn) {
   if (queryCache.has(key)) return;
   fetchOrUsePreloadedData(key, fn);
 }
 
-export function queryClient(dataSources, options) {
+export function queryClient(dataSources: Types.DataSource[], options: Types.QueryClientOptions) {
   preloadedDataSources = dataSources;
+  if (options.staleTime) staleTime = options.staleTime;
+  if (!!options.customCache) queryCache = options.customCache;
   if (options?.urlBasedPrefetching) {
     dataSources = dataSources.filter((dataSource) => dataSource.url === window.location.pathname);
   }
@@ -88,9 +96,9 @@ export function queryClient(dataSources, options) {
   Promise.allSettled(requests);
 }
 
-function formatDataResponse({ status, payload }, key, fn) {
-  const currentStatus = queryCache.get(key).status;
-  const defaultData = {
+function formatDataResponse({ status, payload }: Types.CacheItem, key: Types.QueryKey, fn: Types.QueryFn) {
+  const currentStatus = queryCache.get(key)!.status;
+  const defaultData = Object.freeze({
     isLoading: false,
     isRefetching: false,
     data: null,
@@ -101,19 +109,22 @@ function formatDataResponse({ status, payload }, key, fn) {
       }
       fetchOrUsePreloadedData(key, fn);
     },
-  };
+  });
 
-  const statusResponse = {
+  type Test = keyof typeof statusResponse;
+
+  const statusResponse = Object.freeze({
     idle: { ...defaultData, isLoading: true },
     loading: { ...defaultData, isLoading: true },
     refetching: { ...defaultData, isLoading: false, isRefetching: true, data: payload },
     error: { ...defaultData, error: payload },
     success: { ...defaultData, data: payload },
-  };
-  return statusResponse[status];
+  });
+
+  return statusResponse[status as Test];
 }
 
-function fetchOrUsePreloadedData(key, fn, options) {
+function fetchOrUsePreloadedData(key: Types.QueryKey, fn: Types.QueryFn, options?: Types.QueryOptions) {
   const preloadedDataSource = preloadedDataSources.find((dataSource) => dataSource.key === key);
   prefetchData(key, fn ?? preloadedDataSource?.fn, options);
 }

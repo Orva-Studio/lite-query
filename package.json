@@ -1,0 +1,16 @@
+{
+  "name": "lite-query",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@types/react": "^18.3.2",
+    "install": "^0.13.0",
+    "semantic-release": "^23.1.1"
+  }
+}
