@@ -16,8 +16,8 @@ export function useQuery(options: { queryKey: Types.QueryKey; queryFn: Types.Que
 
 export function useLiteQuery(key: Types.QueryKey, queryFn: Types.QueryFn, options: Types.QueryOptions) {
   queryCache.set(key, queryCache.get(key) ?? { status: "idle", payload: null });
-  const data = useSyncExternalStore(subscriber, () => queryCache.get(key));
-  const isStale = Date.now() - data.timestamp > (options?.staleTime ?? staleTime);
+  const data = useSyncExternalStore(subscriber, () => queryCache.get(key)) as Types.CacheItem;
+  const isStale = Date.now() - (data.timestamp ?? Date.now()) > (options?.staleTime ?? staleTime);
 
   if (data.status === "idle" || (options?.refetchOnMount && data.status === "success" && isStale)) {
     fetchOrUsePreloadedData(key, queryFn, options);
@@ -87,7 +87,7 @@ export function prefetchQuery(key: Types.QueryKey, fn: Types.QueryFn) {
 export function queryClient(dataSources: Types.DataSource[], options: Types.QueryClientOptions) {
   preloadedDataSources = dataSources;
   if (options.staleTime) staleTime = options.staleTime;
-  if (!!options.customCache) queryCache = options.customCache;
+  // if (!!options.customCache) queryCache = options.customCache;
   if (options?.urlBasedPrefetching) {
     dataSources = dataSources.filter((dataSource) => dataSource.url === window.location.pathname);
   }
