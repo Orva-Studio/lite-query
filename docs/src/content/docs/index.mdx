@@ -7,10 +7,10 @@ hero:
   # image:
   #   file: ../../assets/houston.webp
   actions:
-    - text: Read the docs
-      link: /guides/example/
+    - text: Getting Started
+      link: /guides/getting-started/
       icon: right-arrow
-      variant: primary
+      variant: secondary
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
@@ -33,7 +33,11 @@ if (error) return `Error: ${error.message}`;
 
 Simply copy [this file](https://github.com/Orva-Studio/lite-query/blob/main/src/index.ts) and put it anywhere in your project.
 
-If you'd like to install it **as a package**, that will be coming soon...
+Or if you'd like to install it [as a package](https://jsr.io/@orva/lite-query), you can use this command:
+
+```bash
+npx jsr add @orva/lite-query
+```
 
 
 ## Features
@@ -44,12 +48,12 @@ Lite Query address all the data fetching issues raised in the [React Documentati
 		Simple caching system preventing multiple requests for the same data.
 	</Card>
 	<Card title="Prefetching" icon="star">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
+		Fetch data before it's needed, or even before React renders the component.
 	</Card>
 	<Card title="SWR" icon="star">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
+		[Stale-While-Revalidate](https://datatracker.ietf.org/doc/html/rfc5861) supported meaning you can show stale data while fetching new data in the background.
 	</Card>
 	<Card title="And much more..." icon="star">
-		Learn more about all the features in the [Lite Query Docs](https://starlight.astro.build/).
+		Learn more about all the features in the [Lite Query Docs](/guides/getting-started/).
 	</Card>
 </CardGrid>

@@ -15,11 +15,37 @@ export default defineConfig({
 					link: '/guides/getting-started/',
 				},
 				{
-					label: 'Collection',
+					label: 'Prefetching',
+					link: '/guides/prefetching/',
+				},
+				{
+					label: 'Refetching',
+					link: '/guides/refetching/',
+				},
+				{
+					label: 'SWR',
+					link: '/guides/swr/',
+				},
+				{
+					label: 'Aborting Requests',
+					link: '/guides/aborting/',
+				},
+				{
+					label: 'API',
 					items: [
 						// Each item here is one entry in the navigation menu.
-						{ label: 'Example', link: '/guides/example/' },
+						{ label: 'useQuery', link: '/guides/example/' },
+						{ label: 'useLiteQuery', link: '/guides/example/' },
+						{ label: 'prefetchQuery', link: '/guides/example/' },
+						{ label: 'queryClient', link: '/guides/example/' },
+						{ label: 'queryCache', link: '/guides/example/' },
 					],
+				}, {
+					label: 'Customising',
+					link: '/guides/customising/',
+				}, {
+					label: 'Feature Requests',
+					link: '/guides/feature-requests',
 				},
 			],
 		}),
