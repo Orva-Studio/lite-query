@@ -9,12 +9,18 @@ const DEFAULT_STALE_TIME = 5_000;
 let staleTime: number = DEFAULT_STALE_TIME;
 let preloadedDataSources: Types.DataSource[] = [];
 
-export function useQuery(options: { queryKey: Types.QueryKey; queryFn: Types.QueryFn } & Types.QueryOptions) {
+export function useQuery(
+  options: { queryKey: Types.QueryKey; queryFn: Types.QueryFn } & Types.QueryOptions
+): Types.QueryOutput {
   const { queryKey, queryFn, ...restOptions } = options;
   return useLiteQuery(queryKey, queryFn, restOptions);
 }
 
-export function useLiteQuery(key: Types.QueryKey, queryFn: Types.QueryFn, options: Types.QueryOptions) {
+export function useLiteQuery(
+  key: Types.QueryKey,
+  queryFn: Types.QueryFn,
+  options: Types.QueryOptions
+): Types.QueryOutput {
   queryCache.set(key, queryCache.get(key) ?? { status: "idle", payload: null });
   const data = useSyncExternalStore(subscriber, () => queryCache.get(key)) as Types.CacheItem;
   const isStale = Date.now() - (data.timestamp ?? Date.now()) > (options?.staleTime ?? staleTime);

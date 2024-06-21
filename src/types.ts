@@ -31,7 +31,15 @@ interface BaseOptions {
 
 export interface CacheItem {
   controller?: AbortController;
-  status: string; // TODO
+  status: string; // TODO: Update to keyof typeof
   payload: unknown;
   timestamp?: number;
+}
+
+export interface QueryOutput {
+  isLoading: boolean;
+  isRefetching: boolean;
+  data: unknown | null;
+  error: unknown | null;
+  refetch: () => void;
 }
