@@ -5,21 +5,21 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'My Docs',
+			title: 'Lite Query',
 			social: {
-				github: 'https://github.com/withastro/starlight',
+				github: 'https://github.com/Orva-Studio/lite-query',
 			},
 			sidebar: [
 				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', link: '/guides/example/' },
-					],
+					label: 'Getting Started',
+					link: '/guides/getting-started/',
 				},
 				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					label: 'Collection',
+					items: [
+						// Each item here is one entry in the navigation menu.
+						{ label: 'Example', link: '/guides/example/' },
+					],
 				},
 			],
 		}),
