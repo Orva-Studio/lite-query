@@ -15,20 +15,21 @@ export default defineConfig({
 					link: '/guides/getting-started/',
 				},
 				{
-					label: 'Prefetching',
-					link: '/guides/prefetching/',
-				},
-				{
-					label: 'Refetching',
-					link: '/guides/refetching/',
-				},
-				{
-					label: 'SWR',
-					link: '/guides/swr/',
-				},
-				{
-					label: 'Aborting Requests',
-					link: '/guides/aborting/',
+					label: 'Features',
+					items: [
+						{
+							label: 'Prefetching',
+							link: '/guides/features/prefetching/',
+						},
+						{
+							label: 'Refetching',
+							link: '/guides/features/refetching/',
+						},
+						{
+							label: 'SWR',
+							link: '/guides/swr/',
+						},
+					],
 				},
 				{
 					label: 'API',
