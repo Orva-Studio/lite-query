@@ -16,7 +16,7 @@ export interface QueryOptions extends BaseOptions {
 
 export interface QueryClientOptions extends BaseOptions {
   urlBasedPrefetching?: boolean;
-  customCache: CustomCache;
+  staleTime?: number;
 }
 
 export interface CustomCache {

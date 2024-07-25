@@ -93,10 +93,9 @@ export function prefetchQuery(key: Types.QueryKey, fn: Types.QueryFn) {
   fetchOrUsePreloadedData(key, fn);
 }
 
-export function queryClient(dataSources: Types.DataSource[], options: Types.QueryClientOptions) {
+export function prefetchQueries(dataSources: Types.DataSource[], options: Types.QueryClientOptions) {
   preloadedDataSources = dataSources;
   if (options.staleTime) staleTime = options.staleTime;
-  // if (!!options.customCache) queryCache = options.customCache;
   if (options?.urlBasedPrefetching) {
     dataSources = dataSources.filter((dataSource) => dataSource.url === window.location.pathname);
   }
