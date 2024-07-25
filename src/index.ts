@@ -9,17 +9,14 @@ const DEFAULT_STALE_TIME = 5_000;
 let staleTime: number = DEFAULT_STALE_TIME;
 let preloadedDataSources: Types.DataSource[] = [];
 
-/**
- * Alias for useLiteQuery. Exists to ease transition from Tanstack Query
- */
 export function useQuery(
   options: { queryKey: Types.QueryKey; queryFn: Types.QueryFn } & Types.QueryOptions
 ): Types.QueryOutput {
   const { queryKey, queryFn, ...restOptions } = options;
-  return useLiteQuery(queryKey, queryFn, restOptions);
+  return useLQ(queryKey, queryFn, restOptions);
 }
 
-export function useLiteQuery(
+export function useLQ(
   key: Types.QueryKey,
   queryFn: Types.QueryFn,
   options: Types.QueryOptions

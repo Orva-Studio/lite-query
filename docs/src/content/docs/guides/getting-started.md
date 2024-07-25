@@ -42,7 +42,7 @@ const { data, error, isLoading, isRefetching, refetch } = useQuery({
 
 This needs to be tied to a **unique key** (queryKey) which is used internally to identify your query, just like a key value pair.
 
-The **useQuery** or **useLiteQuery** hook will return an object with this type definition;
+The **useQuery** or **useLQ** hook will return an object with this type definition;
 
 ```tsx
 // types.ts
