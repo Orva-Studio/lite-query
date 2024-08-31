@@ -27,7 +27,7 @@ export default defineConfig({
 						},
 						{
 							label: 'SWR',
-							link: '/guides/swr/',
+							link: '/guides/features/swr/',
 						},
 					],
 				},
@@ -41,13 +41,7 @@ export default defineConfig({
 						{ label: 'queryClient', link: '/guides/example/' },
 						{ label: 'queryCache', link: '/guides/example/' },
 					],
-				}, {
-					label: 'Customising',
-					link: '/guides/customising/',
-				}, {
-					label: 'Feature Requests',
-					link: '/guides/feature-requests',
-				},
+				}
 			],
 		}),
 	],
