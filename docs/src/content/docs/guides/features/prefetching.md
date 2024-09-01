@@ -138,7 +138,7 @@ prefetchQueries([
     {queryKey: "posts", queryFn: () => getPosts, url: "/posts"},
     {queryKey: "comments", queryFn: () => getComments, url: "/comments"},
   ],
-  urlBasedPrefetching: true
+  urlBasedPrefetching: true,
 );
 ```
 This will only fetch data if the function runs on one of the specified urls. If a subsequent url is visited, data will be fetched when the `useQuery` or `useLQ` function is called.
