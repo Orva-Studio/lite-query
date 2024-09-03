@@ -22,8 +22,16 @@ export default defineConfig({
 							link: '/guides/features/prefetching/',
 						},
 						{
+							label: 'Data Caching',
+							link: '/guides/features/data-caching/',
+						},
+						{
 							label: 'Refetching',
 							link: '/guides/features/refetching/',
+						},
+						{
+							label: 'Aborting',
+							link: '/guides/features/aborting/',
 						},
 						{
 							label: 'SWR',
@@ -34,8 +42,7 @@ export default defineConfig({
 				{
 					label: 'API',
 					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'useQuery', link: '/guides/example/' },
+						{ label: 'useQuery', link: '/guides/api/usequery/' },
 						{ label: 'useLiteQuery', link: '/guides/example/' },
 						{ label: 'prefetchQuery', link: '/guides/example/' },
 						{ label: 'queryClient', link: '/guides/example/' },
