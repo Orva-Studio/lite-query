@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/Orva-Studio/lite-query/compare/v0.1.0...v0.2.1) (2024-09-07)
+
+
+### Bug Fixes
+
+* issue with export type to make package faster ([784b0fd](https://github.com/Orva-Studio/lite-query/commit/784b0fd4326d656e5f632af0d874f77ceaa7ca09))
+
 ## 0.1.0 (2024-06-21)
 
 
