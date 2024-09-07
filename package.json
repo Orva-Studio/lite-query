@@ -10,6 +10,7 @@
   "files": [
     "index.ts"
   ],
+  "license": "MIT",
   "scripts": {
     "release": "bunx standard-version",
     "publish": "bunx jsr publish"
