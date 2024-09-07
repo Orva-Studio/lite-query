@@ -3,12 +3,18 @@
 import { useSyncExternalStore } from "react";
 import type * as Types from "./types";
 
+/**
+ * Cache of query results
+ */
 export let queryCache: Map<Types.QueryKey, Types.CacheItem> = new Map();
 const DEFAULT_STALE_TIME = 5_000;
 
 let staleTime: number = DEFAULT_STALE_TIME;
 let preloadedDataSources: Types.DataSource[] = [];
 
+/**
+ * Hook to fetch data from the cache or the server
+ */
 export function useQuery(
   options: { queryKey: Types.QueryKey; queryFn: Types.QueryFn } & Types.QueryOptions
 ): Types.QueryOutput {
@@ -16,6 +22,10 @@ export function useQuery(
   return useLQ(queryKey, queryFn, restOptions);
 }
 
+/**
+ * Hook to fetch data from the cache or the server
+ * Different argument structure to useQuery
+ */
 export function useLQ(
   key: Types.QueryKey,
   queryFn: Types.QueryFn,
@@ -85,11 +95,17 @@ function prefetchData(key: Types.QueryKey, fn: Types.QueryFn, options?: Types.Qu
     });
 }
 
+/**
+ * Prefetch data from the server to cache
+ */
 export function prefetchQuery(key: Types.QueryKey, fn: Types.QueryFn) {
   if (queryCache.has(key)) return;
   fetchOrUsePreloadedData(key, fn);
 }
 
+/**
+ * Prefetch multiple data sources to cache
+ */
 export function prefetchQueries(dataSources: Types.DataSource[], options: Types.QueryClientOptions) {
   preloadedDataSources = dataSources;
   if (options.staleTime) staleTime = options.staleTime;
