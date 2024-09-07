@@ -13,9 +13,9 @@ The purpose of **Lite Query** is to solve those issues in a simple and lightweig
 
 ## Installation
 
-All the source code for Lite Query is in [one file](https://github.com/Orva-Studio/lite-query/blob/main/src/index.ts), meaning you can copy _all_ the code from this file and place it anywhere in your project.
+1. All the source code for Lite Query is in [one file](https://github.com/Orva-Studio/lite-query/blob/main/src/index.ts), meaning you can copy _all_ the code from this file and place it anywhere in your project.
 
-Alternatively, if you'd prefer to add it as a package, you can do so with this command
+2. Alternatively, if you'd prefer to add it as a package, you can do so with this command
 
 ```bash
 npx jsr add @orva/lite-query
