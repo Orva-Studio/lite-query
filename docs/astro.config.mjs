@@ -43,10 +43,10 @@ export default defineConfig({
 					label: 'API',
 					items: [
 						{ label: 'useQuery', link: '/guides/api/usequery/' },
-						{ label: 'useLiteQuery', link: '/guides/example/' },
-						{ label: 'prefetchQuery', link: '/guides/example/' },
-						{ label: 'queryClient', link: '/guides/example/' },
-						{ label: 'queryCache', link: '/guides/example/' },
+						{ label: 'useLQ', link: '/guides/api/uselq/' },
+						{ label: 'prefetchQuery', link: '/guides/api/prefetchquery/' },
+						{ label: 'prefetchQueries', link: '/guides/api/prefetchqueries/' },
+						{ label: 'queryCache', link: '/guides/api/querycache/' },
 					],
 				}
 			],

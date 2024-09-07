@@ -133,7 +133,7 @@ You can do that with the `prefetchQueries` function by passing in an optional ur
 import { getPosts } from "./api/posts.ts";
 import { getComments } from "./api/comments.ts";
 import { prefetchQueries } from "./utils/lite-query.ts";
-// TODO: Add prefetchQueries to Library
+
 prefetchQueries([
     {queryKey: "posts", queryFn: () => getPosts, url: "/posts"},
     {queryKey: "comments", queryFn: () => getComments, url: "/comments"},

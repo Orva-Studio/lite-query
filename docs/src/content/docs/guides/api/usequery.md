@@ -14,14 +14,8 @@ function useQuery(options: {
   refetchOnMount?: boolean;
   onSuccess?: (data: unknown) => void;
   onError?: (data: unknown) => void;
-});
-
-```
-It returns an object with the following properties.
-
-```tsx
- {
-   isLoading: boolean;
+}): {
+  isLoading: boolean;
   isRefetching: boolean;
   data: unknown | null;
   error: unknown | null;

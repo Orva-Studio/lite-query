@@ -31,7 +31,7 @@ interface BaseOptions {
 
 export interface CacheItem {
   controller?: AbortController;
-  status: string; // TODO: Update to keyof typeof
+  status: string;
   payload: unknown;
   timestamp?: number;
 }

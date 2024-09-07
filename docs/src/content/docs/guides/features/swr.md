@@ -40,14 +40,13 @@ If it exceeds the stale time of 10,000 milliseconds (10 second), the data will b
 
 Instead of setting stale time for each query, you can set a global stale time for all queries.
 
-This can be done by importing **queryGlobals** and changing the **staleTime** value.
+This can be done by importing **prefetchQueries** and adding the **staleTime** option.
 
 ```tsx {4}
 // main.tsx
-import { queryGlobals } from "./utils/lite-query";
+import { prefetchQueries } from "./utils/lite-query";
 
-// TODO: Add queryGlobals to Library
-queryGlobals.staleTime = 20_000;
+prefetchQueries([], { staleTime: 20_000 });
 ```
 
 Although this technically can be done anywhere in the codebase, it is recommended to do it in the **main** file, so it's easier to find and change if needed.
